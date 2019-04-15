@@ -131,7 +131,7 @@ Player.prototype.imageId= function(){
   for(var i=0; i<=deck.length; i ++){
     giveImageId.push("<img id =" +this.id + "src=" + i + "_b.png>")
   }
-  return giveimageId;
+  return giveImageId;
 }
 
 
@@ -169,4 +169,5 @@ $(document).ready(function() {
   attachListeners();
   game.shuffle();
   game.dealToPlayers();
+  game.assignImageIds();
 });
