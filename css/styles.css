@@ -3,6 +3,37 @@ body {
   background-repeat: repeat-y;
   background-size: cover;
 }
+.col-md-4{
+  border: solid 1px;
+  padding-left:0px;
+  padding-right:0px;
+}
+.container{
+  width: 654px;
+  height: 666px;
+  position: relative;
+  margin-top: 5%;
+
+
+/* background-image: url("http://www.vyseri.com/images/tripletriad.png");
+background-size: cover;
+background-repeat: no-repeat; */
+}
+
+#imgBackground{
+  height: 100%;
+  position: fixed;
+  width: 654px;
+  height: 672px;
+  margin: -17px;
+  margin-top: 0px;
+
+
+}
+.blank{
+  width:218px;
+  height:224px;
+}
 .right{
   float:right;
   border: solid 1px;
