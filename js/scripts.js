@@ -209,6 +209,6 @@ $(document).ready(function() {
   game.shuffle();
   game.dealToPlayers();
   attachListeners();
-  game.assignImageIds();
+  //game.assignImageIds();
   game.displayHand();
 });
