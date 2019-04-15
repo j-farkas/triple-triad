@@ -12,5 +12,17 @@ body {
   float:left;
   border: solid 1px;
   width:224px;
-  height: 1000px;
 }
+
+.col-md-4{
+  border: solid 1px;
+  padding-left:0px;
+  padding-right:0px;
+}
+.container{
+  width: 654px;
+  height: 666px;
+}
+.blank{
+  width:218px;
+  height:224px;
