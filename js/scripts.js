@@ -6,7 +6,7 @@ function Game(){
   this.player1.active = true,
   this.player2 = new Player(),
   this.turn = 0,
-  this.currentID = 0,
+  this.currentID = 1,
   this.board =
    [0,1,2,
     3,4,5
@@ -29,10 +29,12 @@ Game.prototype.shuffle = function() {
 
 Game.prototype.dealToPlayers = function() {
   for(var i = 0; i < 10; i ++){
-    if(i%2 ==1){
-      this.player1.hand.push(this.deck[i])
+    if(i%2 ===1){
+      this.deck[i].owner = "blue";
+      this.player1.hand.push(this.deck[i]);
     }else{
-      this.player2.hand.push(this.deck[i])
+      this.deck[i].owner = "red";
+      this.player2.hand.push(this.deck[i]);
     }
   }
 }
@@ -61,14 +63,6 @@ function Player(){
 }
 
 
-// Player.prototype.displayHand = function(card) {
-//   game.currentID
-//   for(var i = 1; i <= 5; i++) {
-//     this.hand[i]
-//     $("#player1deck").addClass("#img1");
-//     $("#player2deck").addClass("#img1");
-//   }
-// }
 
 Game.prototype.swapActive = function(){
   if(game.player1.active === true){
@@ -143,6 +137,12 @@ Game.prototype.placeCard = function(location){
 
 }
 
+Game.prototype.displayHand = function() {
+  for(var i = 0; i < 5; i++){
+  $(".p1."+(i+1)).attr("src","img/"+game.player1.hand[i].id+"_b.png");
+  $(".p2."+(i+1)).attr("src","img/"+game.player2.hand[i].id+"_b.png");
+  }
+}
 
 var game = new Game();
 
@@ -189,8 +189,10 @@ function attachListeners() {
   });
   $(".container").on("click", ".col-md-4", function() {
     if(game.selected !== false){
+
       var location = $(this).attr('class');
       location = location.charAt(location.length-1);
+      if(game.board[location] >= 0){
       console.log(location);
       $("img."+location).attr("src","img/"+game.selected+"_b.png");
       $("#"+game.selected).remove();
@@ -199,6 +201,7 @@ function attachListeners() {
       game.selected = false;
       game.swapActive();
     }
+  }
   });
 };
 
@@ -206,7 +209,6 @@ $(document).ready(function() {
   game.shuffle();
   game.dealToPlayers();
   attachListeners();
-  game.shuffle();
-  game.dealToPlayers();
   game.assignImageIds();
+  game.displayHand();
 });
