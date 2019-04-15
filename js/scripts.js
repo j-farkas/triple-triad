@@ -14,9 +14,9 @@ function Game(){
 }
 
 Game.prototype.shuffle = function() {
-  var i = 0
-  , j = 0
-  , temp = null;
+  var i = 0;
+   j = 0;
+  temp = null;
 
   for (i = this.deck.length - 1; i > 0; i -= 1) {
     j = Math.floor(Math.random() * (i + 1));
@@ -28,12 +28,19 @@ Game.prototype.shuffle = function() {
 
 Game.prototype.dealToPlayers = function() {
   for(var i = 0; i < 10; i ++){
-    if(this.deck[i]%2 ==1){
-      this.deck[i].push(this.player1.hand)
+    if(i%2 ===1){
+      this.player1.hand.push(this.deck[i]);
     }else{
-      this.deck[i].push(this.player2.hand)
+      this.player2.hand.push(this.deck[i]);
     }
   }
+}
+
+Game.prototype.findActive = function() {
+  if(game.player1.active === true){
+    return game.player1;
+  }
+    return game.player2;
 }
 
 
@@ -45,14 +52,14 @@ function Player(){
 }
 
 
-Player.prototype.displayHand = function(card) {
-  game.currentID
-  for(var i = 1; i <= 5; i++) {
-    this.hand[i]
-    $("#player1deck").addClass("#img1");
-    $("#player2deck").addClass("#img1")
-  }
-}
+// Player.prototype.displayHand = function(card) {
+//   game.currentID
+//   for(var i = 1; i <= 5; i++) {
+//     this.hand[i]
+//     $("#player1deck").addClass("#img1");
+//     $("#player2deck").addClass("#img1");
+//   }
+// }
 
 
 Game.prototype.swapActive = function(){
@@ -76,13 +83,13 @@ function Card(top, bottom, left, right){
 }
 
 //before deck gets shuffled
-Card.prototype.imageID(){
-  var giveImageId = [];
-  for(var i=0; i<=deck.length; i ++){
-    giveImageId.push("<img id =" +this.id + "src=" + i + "_b.png">)
-  }
-  return giveimageId;
-}
+// Card.prototype.imageID(){
+//   var giveImageId = [];
+//   for(var i=0; i<=deck.length; i ++){
+//     giveImageId.push("<img id =" +this.id + "src=" + i + "_b.png">)
+//   }
+//   return giveimageId;
+// }
 
 
 Game.prototype.findCard = function(id) {
@@ -158,5 +165,7 @@ function attachListeners() {
 };
 
 $(document).ready(function() {
+  game.shuffle();
+  game.dealToPlayers();
   attachListeners();
 });
