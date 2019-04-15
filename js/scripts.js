@@ -70,6 +70,18 @@ Game.prototype.findActive = function() {
     return game.player2;
 }
 
+//Sudden Death	If the game ends in a draw, a sudden death occurs in which a new game is started but the cards are distributed on the side of the color they were on at the end of the game.
+Game.prototype.suddenDeath = function() {
+
+}
+
+Game.prototype.restartGame = function() {
+  this.board =
+   [0,1,2,
+    3,4,5
+    ,6,7,8];
+  // reset scores to 5 for p1 and p2 after they're initialized
+}
 
 var game = new Game();
 
