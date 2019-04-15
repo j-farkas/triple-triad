@@ -1,3 +1,4 @@
+//Game
 function Game(){
   this.deck = [],
   this.score = 5,
@@ -38,6 +39,14 @@ Game.prototype.dealToPlayers = function() {
   }
 }
 
+
+Game.prototype.assignImageIds = function() {
+  var player1images = [];
+  var player2images = [];
+  player1images = Game.player1.imageId();
+  player2images = Game.player2.imageId();
+}
+
 Game.prototype.findActive = function() {
   if(game.player1.active === true){
     return game.player1;
@@ -55,7 +64,6 @@ function Player(){
 
 
 
-
 Game.prototype.swapActive = function(){
   if(game.player1.active === true){
     game.player2.active = true;
@@ -66,15 +74,6 @@ Game.prototype.swapActive = function(){
   }
 }
 
-function Card(top, bottom, left, right){
-  this.top = top,
-  this.bottom = bottom,
-  this.left = left,
-  this.right = right
-  this.id = game.currentID,
-  game.currentID++;
-  game.deck.push(this);
-}
 
 //before deck gets shuffled
 // Card.prototype.imageID(){
@@ -145,6 +144,45 @@ Game.prototype.displayHand = function() {
   }
 }
 
+var game = new Game();
+
+//Player
+function Player(){
+  this.hand = [],
+  this.active = false
+}
+
+
+Player.prototype.displayHand = function(card) {
+  game.currentID
+  for(var i = 1; i <= 5; i++) {
+    this.hand[i]
+    $("#player1deck").addClass("#img1");
+    $("#player2deck").addClass("#img1")
+  }
+}
+
+//before deck gets shuffled
+Player.prototype.imageId= function(){
+  var giveImageId = [];
+  for(var i=0; i<=deck.length; i ++){
+    giveImageId.push("<img id =" +this.id + "src=" + i + "_b.png>")
+  }
+  return giveImageId;
+}
+
+
+function Card(top, bottom, left, right){
+  this.top = top,
+  this.bottom = bottom,
+  this.left = left,
+  this.right = right
+  this.id = game.currentID,
+  game.currentID++;
+  game.deck.push(this);
+}
+
+
 function attachListeners() {
   $("body").on("click", "img.card", function() {
     game.selected = this.id;
@@ -171,5 +209,6 @@ $(document).ready(function() {
   game.shuffle();
   game.dealToPlayers();
   attachListeners();
+  game.assignImageIds();
   game.displayHand();
 });
