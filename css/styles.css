@@ -11,3 +11,14 @@
   width:218px;
   height:224px;
 }
+.right{
+  float:right;
+  border: solid 1px;
+  width:224px;
+}
+.left{
+  float:left;
+  border: solid 1px;
+  width:224px;
+  height: 1000px;
+}
