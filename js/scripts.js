@@ -1,3 +1,4 @@
+//Game
 function Game(){
   this.deck = [],
   this.score = 5,
@@ -28,32 +29,20 @@ Game.prototype.shuffle = function() {
 
 Game.prototype.dealToPlayers = function() {
   for(var i = 0; i < 10; i ++){
-    if(this.deck[i]%2 ==1){
-      this.deck[i].push(this.player1.hand)
+    if(i%2 ==1){
+      this.player1.hand.push(this.deck[i])
     }else{
-      this.deck[i].push(this.player2.hand)
+      this.player2.hand.push(this.deck[i])
     }
   }
 }
 
-
-var game = new Game();
-
-function Player(){
-  this.hand = [],
-  this.active = false
+Game.prototype.assignImageIds = function() {
+  var player1images = [];
+  var player2images = [];
+  player1images = Game.player1.imageId();
+  player2images = Game.player2.imageId();
 }
-
-
-Player.prototype.displayHand = function(card) {
-  game.currentID
-  for(var i = 1; i <= 5; i++) {
-    this.hand[i]
-    $("#player1deck").addClass("#img1");
-    $("#player2deck").addClass("#img1")
-  }
-}
-
 
 Game.prototype.swapActive = function(){
   if(game.player1.active === true){
@@ -64,26 +53,6 @@ Game.prototype.swapActive = function(){
     game.player1.active = true;
   }
 }
-
-function Card(top, bottom, left, right){
-  this.top = top,
-  this.bottom = bottom,
-  this.left = left,
-  this.right = right
-  this.id = game.currentID,
-  game.currentID++;
-  game.deck.push(this);
-}
-
-//before deck gets shuffled
-Card.prototype.imageID(){
-  var giveImageId = [];
-  for(var i=0; i<=deck.length; i ++){
-    giveImageId.push("<img id =" +this.id + "src=" + i + "_b.png">)
-  }
-  return giveimageId;
-}
-
 
 Game.prototype.findCard = function(id) {
   for (var i=0; i< this.deck.length; i++) {
@@ -138,6 +107,45 @@ Game.prototype.placeCard = function(location){
 }
 
 
+var game = new Game();
+
+//Player
+function Player(){
+  this.hand = [],
+  this.active = false
+}
+
+
+Player.prototype.displayHand = function(card) {
+  game.currentID
+  for(var i = 1; i <= 5; i++) {
+    this.hand[i]
+    $("#player1deck").addClass("#img1");
+    $("#player2deck").addClass("#img1")
+  }
+}
+
+//before deck gets shuffled
+Player.prototype.imageId= function(){
+  var giveImageId = [];
+  for(var i=0; i<=deck.length; i ++){
+    giveImageId.push("<img id =" +this.id + "src=" + i + "_b.png>")
+  }
+  return giveimageId;
+}
+
+
+function Card(top, bottom, left, right){
+  this.top = top,
+  this.bottom = bottom,
+  this.left = left,
+  this.right = right
+  this.id = game.currentID,
+  game.currentID++;
+  game.deck.push(this);
+}
+
+
 function attachListeners() {
   $("body").on("click", "img.card", function() {
     game.selected = this.id;
@@ -159,4 +167,6 @@ function attachListeners() {
 
 $(document).ready(function() {
   attachListeners();
+  game.shuffle();
+  game.dealToPlayers();
 });
