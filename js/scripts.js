@@ -140,7 +140,7 @@ Game.prototype.placeCard = function(location){
 
 Game.prototype.displayHand = function() {
   for(var i = 0; i < 5; i++){
-  $(".p1."+(i+1)).attr("src","img/"+game.player1.hand[i].id+"_b.png");
+  $(".p1."+(i+1)).attr("src","img/"+game.player1.hand[i].id+"_b.png").attr('id',game.player1.hand[i].id);
   $(".p2."+(i+1)).attr("src","img/"+game.player2.hand[i].id+"_b.png");
   }
 }
@@ -156,7 +156,7 @@ function attachListeners() {
       location = location.charAt(location.length-1);
       if(game.board[location] >= 0){
       console.log(location);
-      $("img."+location).attr("src","img/"+game.selected+"_b.png");
+      $("img.board."+location).attr("src","img/"+game.selected+"_b.png");
       $("#"+game.selected).remove();
       game.board[location]=game.findCard(game.selected);
       console.log(game);
