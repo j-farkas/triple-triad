@@ -15,9 +15,9 @@ function Game(){
 }
 
 Game.prototype.shuffle = function() {
-  var i = 0
-  , j = 0
-  , temp = null;
+  var i = 0;
+   j = 0;
+  temp = null;
 
   for (i = this.deck.length - 1; i > 0; i -= 1) {
     j = Math.floor(Math.random() * (i + 1));
@@ -37,12 +37,38 @@ Game.prototype.dealToPlayers = function() {
   }
 }
 
+
 Game.prototype.assignImageIds = function() {
   var player1images = [];
   var player2images = [];
   player1images = Game.player1.imageId();
   player2images = Game.player2.imageId();
 }
+
+Game.prototype.findActive = function() {
+  if(game.player1.active === true){
+    return game.player1;
+  }
+    return game.player2;
+}
+
+
+var game = new Game();
+
+function Player(){
+  this.hand = [],
+  this.active = false
+}
+
+
+// Player.prototype.displayHand = function(card) {
+//   game.currentID
+//   for(var i = 1; i <= 5; i++) {
+//     this.hand[i]
+//     $("#player1deck").addClass("#img1");
+//     $("#player2deck").addClass("#img1");
+//   }
+// }
 
 Game.prototype.swapActive = function(){
   if(game.player1.active === true){
@@ -53,6 +79,17 @@ Game.prototype.swapActive = function(){
     game.player1.active = true;
   }
 }
+
+
+//before deck gets shuffled
+// Card.prototype.imageID(){
+//   var giveImageId = [];
+//   for(var i=0; i<=deck.length; i ++){
+//     giveImageId.push("<img id =" +this.id + "src=" + i + "_b.png">)
+//   }
+//   return giveimageId;
+// }
+
 
 Game.prototype.findCard = function(id) {
   for (var i=0; i< this.deck.length; i++) {
@@ -166,6 +203,8 @@ function attachListeners() {
 };
 
 $(document).ready(function() {
+  game.shuffle();
+  game.dealToPlayers();
   attachListeners();
   game.shuffle();
   game.dealToPlayers();
