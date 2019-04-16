@@ -1,5 +1,5 @@
 body {
-  background: url("https://img.freepik.com/free-photo/brown-concrete-wall-background_43665-111.jpg?size=626&ext=jpg") no-repeat center center fixed;
+  background-image: url(../img2/background-pic.jpg);
   background-size: cover;
 }
 .col-md-4{
@@ -43,15 +43,8 @@ background-repeat: no-repeat; */
   border: solid 1px;
   width:224px;
 }
-
-.col-md-4{
-  border: solid 1px;
-  padding-left:0px;
-  padding-right:0px;
-}
-.container{
-  width: 654px;
-  height: 666px;
+.well{
+  height:100%;
 }
 .blank{
   width:218px;
