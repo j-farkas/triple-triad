@@ -1,3 +1,4 @@
+function cardList(){
 new Card(9,7,3,6);
 new Card(9,8,4,4);
 new Card(4,8,9,4);
@@ -31,3 +32,4 @@ new Card(10,2,6,8);
 new Card(2,9,10,6);
 new Card(6,4,9,7);
 new Card(5,3,9,10);
+}

@@ -207,6 +207,22 @@ Card.prototype.checkFlip = function(location, direction){
 
 }
 
+function restartGame(){
+  $("img.board").removeAttr("src");
+  game = new Game();
+  //$(".p1."+(i+1)).attr("src");//
+  cardList();
+  $(".p1").removeAttr("src");
+  $(".p2").removeAttr("src");
+  $(".p1").addClass("card");
+  $(".p2").removeClass("card");
+  game.shuffle();
+  game.dealToPlayers();
+  game.displayHand();
+
+}
+
+
 Game.prototype.displayHand = function() {
   for(var i = 0; i < 5; i++){
   $(".p1."+(i+1)).attr("src","img/"+game.player1.hand[i].id+"_b.png").attr('id',game.player1.hand[i].id);
@@ -228,11 +244,10 @@ Game.prototype.flip = function(location){
     $("img.board."+location).attr("src","img/"+game.board[location].id+"_r.png");
 
   }
-  setTimeout(function(){ $
+  setTimeout(function(){
     $(".animated").removeClass("flip");
     $(".animated").removeClass("animated"); }, 300);
-
-}
+};
 
 //Player
 function Player(){
@@ -267,8 +282,12 @@ function attachListeners() {
     game.selected = this.id;
     $(".addGlow").removeClass("addGlow");
     $("#" + this.id).addClass("addGlow");
-
   });
+
+  $("body").on("click", "h1.restart", function() {
+    restartGame();
+  });
+
   $(".container").on("click", ".col-md-4", function() {
     if(game.selected !== false){
       var location = $(this).attr('class');
@@ -282,7 +301,7 @@ function attachListeners() {
           }
         }
 
-      $("#"+game.selected).remove();
+      $("#"+game.selected).removeAttr("src");
       game.board[location]=game.findCard(game.selected);
       game.turn += 1;
       if(game.turn%2 === 0){
@@ -305,6 +324,7 @@ function attachListeners() {
 };
 
 $(document).ready(function() {
+  cardList();
   game.shuffle();
   game.dealToPlayers();
   attachListeners();
