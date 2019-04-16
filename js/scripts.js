@@ -25,6 +25,7 @@ function Card(top, bottom, left, right){
 
 Game.prototype.checkWinner = function(){
   var blue = 0;
+  this.suddenDeath();
   this.board.forEach(function(card){
     if(card.owner === "blue"){
       blue++;
@@ -36,6 +37,7 @@ Game.prototype.checkWinner = function(){
   }else if(blue < 5){
     console.log('red wins');
   }else{
+    this.suddenDeath();
     console.log('tie');
   }
 }
@@ -98,6 +100,27 @@ Game.prototype.swapActive = function(){
     game.player2.active = false;
     game.player1.active = true;
   }
+}
+
+Game.prototype.suddenDeath = function() {
+  this.player1.hand = [];
+  this.player2.hand = [];
+  for(var i = 0; i < 8; i++) {
+    if(this.board[i].owner === "blue") {
+      this.player1.hand.push(this.board[i]);
+    } else {
+      this.player2.hand.push(this.board[i]);
+    }
+  }
+  console.log(this.player1.hand, this.player2.hand);
+}
+
+Game.prototype.newGame = function() {
+  this.board =
+   [0,1,2,
+    3,4,5
+    ,6,7,8];
+
 }
 
 
