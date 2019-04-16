@@ -255,6 +255,8 @@ function Card(top, bottom, left, right){
 function attachListeners() {
   $("body").on("click", "img.card", function() {
     game.selected = this.id;
+    $(".addGlow").removeClass("addGlow");
+    $("#" + this.id).addClass("addGlow");
 
   });
   $(".container").on("click", ".col-md-4", function() {
