@@ -95,3 +95,9 @@ body {
 .addGlow {
   box-shadow: 0px 0px 30px #00F;
 }
+
+.restart {
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  font-weight: bold;
+}
