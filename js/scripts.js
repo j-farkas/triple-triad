@@ -220,11 +220,18 @@ Game.prototype.flip = function(location){
   console.log("You flipped!");
   if(game.board[location].owner === 'red'){
     game.board[location].owner = 'blue';
+    $("img.board."+location).addClass('animated flip');
     $("img.board."+location).attr("src","img/"+game.board[location].id+"_b.png");
   }else{
     game.board[location].owner = 'red';
+    $("img.board."+location).addClass('animated flip');
     $("img.board."+location).attr("src","img/"+game.board[location].id+"_r.png");
+
   }
+  setTimeout(function(){ $
+    $(".animated").removeClass("flip");
+    $(".animated").removeClass("animated"); }, 300);
+
 }
 
 //Player
