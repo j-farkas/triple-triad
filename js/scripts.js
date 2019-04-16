@@ -38,7 +38,14 @@ Game.prototype.checkScore = function(){
     $(".redscore").addClass("blinker")
   }
   if(game.turn === 9){
-    
+    $(".winner").toggle();
+    if(blue > 5){
+      $(".winner").text("Blue Wins");
+    }else if(blue <5){
+      $(".winner").text("Red Wins");
+    }else{
+      $(".winner").text("Nobody Wins");
+    }
   }
 }
 
@@ -215,6 +222,7 @@ function restartGame(){
   $(".p2").removeAttr("src");
   $(".p1").addClass("card");
   $(".p2").removeClass("card");
+  $(".addGlow").removeClass("addGlow");
   game.shuffle();
   game.dealToPlayers();
   game.displayHand();
