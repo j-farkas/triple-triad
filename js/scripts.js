@@ -23,20 +23,22 @@ function Card(top, bottom, left, right){
   game.deck.push(this);
 }
 
-Game.prototype.checkWinner = function(){
+Game.prototype.checkScore = function(){
   var blue = 0;
-  this.board.forEach(function(card){
+  this.deck.forEach(function(card){
     if(card.owner === "blue"){
       blue++;
     }
   })
-  if(blue > 5)
-  {
-    console.log('blue wins')
-  }else if(blue < 5){
-    console.log('red wins');
+  $(".scoreblue").html("<h1 class='bluescore'>"+blue+"</h1>");
+  $(".scorered").html("<h1 class='redscore'>"+(10-blue)+"</h1>");
+  if(game.turn%2===0){
+    $(".bluescore").addClass("blinker")
   }else{
-    console.log('tie');
+    $(".redscore").addClass("blinker")
+  }
+  if(game.turn === 9){
+    
   }
 }
 
@@ -80,9 +82,6 @@ Game.prototype.findActive = function() {
     return game.player2;
 }
 
-
-var game = new Game();
-
 function Player(){
   this.hand = [],
   this.active = false
@@ -91,12 +90,12 @@ function Player(){
 
 
 Game.prototype.swapActive = function(){
-  if(game.player1.active === true){
-    game.player2.active = true;
-    game.player1.active = false;
+  if(this.player1.active === true){
+    this.player2.active = true;
+    this.player1.active = false;
   }else{
-    game.player2.active = false;
-    game.player1.active = true;
+    this.player2.active = false;
+    this.player1.active = true;
   }
 }
 
@@ -172,7 +171,7 @@ Game.prototype.placeCard = function(location){
         direction = 'left';
       }
       console.log(neighbors);
-      game.board[location].checkFlip(neighbors[i],direction)
+      this.board[location].checkFlip(neighbors[i],direction)
   }
 }
 
@@ -296,18 +295,18 @@ function attachListeners() {
       game.placeCard(parseInt(location));
       game.selected = false;
       game.swapActive();
-      if(game.turn === 9){
-        game.checkWinner();
-      }
+      game.checkScore();
     }
   }
   });
 };
 
 $(document).ready(function() {
+  cardList();
   game.shuffle();
   game.dealToPlayers();
   attachListeners();
   //game.assignImageIds();
   game.displayHand();
+  game.checkScore();
 });
