@@ -13,6 +13,16 @@ function Game(){
   this.selected = false;
 }
 
+function Card(top, bottom, left, right){
+  this.up = top,
+  this.down = bottom,
+  this.left = left,
+  this.right = right
+  this.id = game.currentID,
+  game.currentID++;
+  game.deck.push(this);
+}
+
 Game.prototype.checkWinner = function(){
   var blue = 0;
   this.board.forEach(function(card){
@@ -241,15 +251,6 @@ function Player(){
 // }
 
 
-function Card(top, bottom, left, right){
-  this.up = top,
-  this.down = bottom,
-  this.left = left,
-  this.right = right
-  this.id = game.currentID,
-  game.currentID++;
-  game.deck.push(this);
-}
 
 
 function attachListeners() {
