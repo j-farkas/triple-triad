@@ -13,6 +13,8 @@ function Game(){
   this.selected = false;
 }
 
+
+
 function Card(top, bottom, left, right){
   this.up = top,
   this.down = bottom,
@@ -38,7 +40,7 @@ Game.prototype.checkScore = function(){
     $(".redscore").addClass("blinker")
   }
   if(game.turn === 9){
-    
+
   }
 }
 
