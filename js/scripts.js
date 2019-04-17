@@ -40,7 +40,14 @@ Game.prototype.checkScore = function(){
     $(".redscore").addClass("blinker")
   }
   if(game.turn === 9){
-
+    $(".winner").toggle();
+    if(blue > 5){
+      $(".winner").text("Blue Wins");
+    }else if(blue <5){
+      $(".winner").text("Red Wins");
+    }else{
+      $(".winner").text("Nobody Wins");
+    }
   }
 }
 
@@ -211,12 +218,12 @@ Card.prototype.checkFlip = function(location, direction){
 function restartGame(){
   $("img.board").removeAttr("src");
   game = new Game();
-  //$(".p1."+(i+1)).attr("src");//
   cardList();
   $(".p1").removeAttr("src");
   $(".p2").removeAttr("src");
   $(".p1").addClass("card");
   $(".p2").removeClass("card");
+  $(".addGlow").removeClass("addGlow");
   game.shuffle();
   game.dealToPlayers();
   game.displayHand();
@@ -275,8 +282,66 @@ function Player(){
 //   return giveImageId;
 // }
 
+function addCard(location){
+  if(game.selected !== false){
 
+    if(game.board[location] >= 0){
+      if(game.turn%2 === 0){
+        $("img.board."+location).attr("src","img/"+game.selected+"_b.png");
+      }else{
+        if(game.turn%2 === 1){
+          $("img.board."+location).attr("src","img/"+game.selected+"_r.png");
+        }
+      }
 
+    $("#"+game.selected).removeAttr("src");
+    game.board[location]=game.findCard(game.selected);
+    game.turn += 1;
+    if(game.turn%2 === 0){
+      $(".p1").addClass('card');
+      $(".p2").removeClass('card');
+    }else{
+      $(".p2").addClass('card');
+      $(".p1").removeClass('card');
+    }
+    console.log(game);
+    game.placeCard(parseInt(location));
+    game.selected = false;
+    game.swapActive();
+    game.checkScore();
+    }
+  }
+}
+
+function drag_handler(ev) {
+ console.log("dragStart");
+ // Change the source element's background color to signify drag has started
+ // Set the drag's format and data. Use the event target's id for the data
+ ev.dataTransfer.setData("text/plain", ev.target.id);
+var drag = ev.path[0].getAttribute("id");
+if((game.findCard(drag).owner === 'red' && game.turn%2 ===1) ||(game.findCard(drag).owner === 'blue' && game.turn%2 ===0)){
+ game.selected = drag;
+}
+ console.log(game.selected);
+
+}
+
+function dragover_handler(ev) {
+ console.log("dragOver");
+ ev.preventDefault();
+}
+
+function drop_handler(ev) {
+ console.log("Drop");
+ ev.preventDefault();
+ // Get the data, which is the id of the drop target
+ var location = ev.path[0].getAttribute("class");
+ location = location.charAt(location.length-1);
+ console.log(location);
+ addCard(location);
+ // Clear the drag data cache (for all formats/types)
+ ev.dataTransfer.clearData();
+}
 
 function attachListeners() {
   $("body").on("click", "img.card", function() {
@@ -290,35 +355,9 @@ function attachListeners() {
   });
 
   $(".container").on("click", ".col-md-4", function() {
-    if(game.selected !== false){
-      var location = $(this).attr('class');
-      location = location.charAt(location.length-1);
-      if(game.board[location] >= 0){
-        if(game.turn%2 === 0){
-          $("img.board."+location).attr("src","img/"+game.selected+"_b.png");
-        }else{
-          if(game.turn%2 === 1){
-            $("img.board."+location).attr("src","img/"+game.selected+"_r.png");
-          }
-        }
-
-      $("#"+game.selected).removeAttr("src");
-      game.board[location]=game.findCard(game.selected);
-      game.turn += 1;
-      if(game.turn%2 === 0){
-        $(".p1").addClass('card');
-        $(".p2").removeClass('card');
-      }else{
-        $(".p2").addClass('card');
-        $(".p1").removeClass('card');
-      }
-      console.log(game);
-      game.placeCard(parseInt(location));
-      game.selected = false;
-      game.swapActive();
-      game.checkScore();
-    }
-  }
+    var location = $(this).attr('class');
+    location = location.charAt(location.length-1);
+    addCard(location);
   });
 };
 
