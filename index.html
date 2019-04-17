@@ -8,9 +8,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/scripts.js"></script>
     <script src="js/cards.js"></script>
+    <script src="js/audio.js"></script>
     <title>Triple Triad</title>
   </head>
   <body>
+    <div class='music'>
+      <audio autoplay loop  id='audioNotChrome'>
+        <source src='audio/gamemusic.mp3'>
+      </audio>
+    <iframe src='audio/gamemusic.mp3' allow='autoplay' id='audioChrome' style='display:none'></iframe>
+    </div>
     <h1 class = "restart">Triple Triad</h1>
     <div class="well left">
       <img class="p1 1 card">
