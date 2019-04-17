@@ -176,3 +176,11 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+.tutorial {
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  font-weight: bold;
+  color: black;
+  width: 100%;
+}
