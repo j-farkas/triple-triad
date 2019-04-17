@@ -13,53 +13,53 @@
   <body>
     <h1 class = "restart">Triple Triad</h1>
     <div class="well left">
-      <img class="p1 1 card">
-      <img class="p1 2 card">
-      <img class="p1 3 card">
-      <img class="p1 4 card">
-      <img class="p1 5 card">
+      <img draggable='true' ondrag="drag_handler(event)" class="p1 1 card">
+      <img draggable='true' ondrag="drag_handler(event)" class="p1 2 card">
+      <img draggable='true' ondrag="drag_handler(event)" class="p1 3 card">
+      <img draggable='true' ondrag="drag_handler(event)" class="p1 4 card">
+      <img draggable='true' ondrag="drag_handler(event)" class="p1 5 card">
     </div>
     <div class = "scoreblue"></div>
     <div class ="well right">
-      <img class="p2 1">
-      <img class="p2 2">
-      <img class="p2 3">
-      <img class="p2 4">
-      <img class="p2 5">
+      <img draggable='true' ondrag="drag_handler(event)" class="p2 1">
+      <img draggable='true' ondrag="drag_handler(event)" class="p2 2">
+      <img draggable='true' ondrag="drag_handler(event)" class="p2 3">
+      <img draggable='true' ondrag="drag_handler(event)" class="p2 4">
+      <img draggable='true' ondrag="drag_handler(event)" class="p2 5">
     </div>
     <div class = "scorered"></div>
     <div class="container">
       <img id = "imgBackground" src= "img2/board.png">
       <div class="row text-center">
-          <div class="col-md-4 blank 0">
+          <div class="col-md-4 blank 0" ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
             <img class='0 board'>
           </div>
-          <div class="col-md-4 blank 1">
+          <div class="col-md-4 blank 1" ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
             <img class='1 board'>
           </div>
-          <div class="col-md-4 right blank 2">
+          <div class="col-md-4 right blank 2" ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
             <img class='2 board'>
         </div>
         </div>
         <div class="row text-center">
-          <div class="col-md-4 blank 3">
+          <div class="col-md-4 blank 3" ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
             <img class='3 board'>
           </div>
-          <div class="col-md-4 blank 4">
+          <div class="col-md-4 blank 4" ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
             <img class='4 board'>
           </div>
-          <div class="col-md-4 right blank 5">
+          <div class="col-md-4 right blank 5" ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
             <img class='5 board'>
         </div>
       </div>
       <div class="row text-center">
-        <div class="col-md-4 bottom blank 6">
+        <div class="col-md-4 bottom blank 6" ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
           <img class='6 board'>
         </div>
-        <div class="col-md-4 bottom blank 7">
+        <div class="col-md-4 bottom blank 7" ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
           <img class='7 board'>
         </div>
-        <div class="col-md-4 right bottom blank 8">
+        <div class="col-md-4 right bottom blank 8" ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
           <img class='8 board'>
         </div>
       </div>
