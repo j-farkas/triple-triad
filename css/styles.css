@@ -74,8 +74,8 @@ body {
 
 }
 .blank{
-  width:218px;
-  height:224px;
+  min-width:218px;
+  min-height:224px;
 }
 .right{
   float:right;
@@ -175,4 +175,49 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+@media (max-width: 1400px) {
+  .left {
+    position: absolute;
+    width: 436px;
+    height: 672px;
+    bottom: 10%;
+    left: 0;
+  }
+  .right {
+    position: absolute;
+    width: 50%;
+    width: 436px;
+    height: 672px;
+    bottom: 10%;
+    right: 0;
+  }
+  .card {
+    display: inline;
+  }
+  #imgBackground {
+    position: absolute;
+  }
+  .blank {
+    display: inline;
+  }
+
+  .blank {
+    max-height: 224px;
+  }
+
+  .bluescore {
+    position: absolute;
+    z-index: 1;
+    left: 20vw;
+  }
+  .redscore {
+    position: absolute;
+    z-index: 1;
+    right: 20vw;
+  }
+  .blank.5 {
+
+  }
 }

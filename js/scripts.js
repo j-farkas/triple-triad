@@ -228,6 +228,9 @@ function restartGame(){
   $("img.board").removeAttr("src");
   game = new Game();
   cardList();
+  if($("input:checkbox[name=suddenDeath]:checked")[0]) {
+    game.suddenDeathMode = true;
+  }
   $(".p1").removeAttr("src");
   $(".p2").removeAttr("src");
   $(".p1").addClass("card");
