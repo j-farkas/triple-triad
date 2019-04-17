@@ -13,6 +13,8 @@ function Game(){
   this.selected = false;
 }
 
+
+
 function Card(top, bottom, left, right){
   this.up = top,
   this.down = bottom,
@@ -216,7 +218,6 @@ Card.prototype.checkFlip = function(location, direction){
 function restartGame(){
   $("img.board").removeAttr("src");
   game = new Game();
-  //$(".p1."+(i+1)).attr("src");//
   cardList();
   $(".p1").removeAttr("src");
   $(".p2").removeAttr("src");
