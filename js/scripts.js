@@ -11,6 +11,7 @@ function Game(){
     3,4,5
     ,6,7,8],
   this.selected = false;
+  this.suddenDeathMode = false;
 }
 
 function Card(top, bottom, left, right){
@@ -37,17 +38,25 @@ Game.prototype.checkScore = function(){
   }else{
     $(".redscore").addClass("blinker")
   }
-  if(game.turn === 9){
+  if(game.turn % 9 === 0 && game.turn > 0){
     $(".winner").toggle();
     if(blue > 5){
       $(".winner").text("Blue Wins");
     }else if(blue <5){
       $(".winner").text("Red Wins");
     }else{
-      $(".winner").text("Nobody Wins");
+      if(game.suddenDeathMode === true) {
+        $(".winner").text("SUDDEN DEATH");
+        this.suddenDeath();
+      }
+      else {
+        $(".winner").text("Nobody Wins");
+      }
     }
   }
 }
+
+
 
 Game.prototype.shuffle = function() {
   var i = 0;
@@ -223,9 +232,11 @@ function restartGame(){
   $(".p1").addClass("card");
   $(".p2").removeClass("card");
   $(".addGlow").removeClass("addGlow");
+  $(".winner").hide();
   game.shuffle();
   game.dealToPlayers();
   game.displayHand();
+  game.checkScore();
 
 }
 
@@ -255,6 +266,27 @@ Game.prototype.flip = function(location){
     $(".animated").removeClass("flip");
     $(".animated").removeClass("animated"); }, 300);
 };
+
+Game.prototype.suddenDeath = function() {
+  this.player1.hand = [];
+  this.player2.hand = [];
+  for(var i = 0; i < 10; i++) {
+    if(this.deck[i].owner === "blue") {
+      this.player1.hand.push(this.deck[i]);
+    } else {
+      this.player2.hand.push(this.deck[i]);
+    }
+  }
+  game.board = [0,1,2,3,4,5,6,7,8];
+  $("img.board").removeAttr("src");
+  $(".p1").removeAttr("src");
+  $(".p2").removeAttr("src");
+  $(".p1").addClass("card");
+  $(".p2").removeClass("card");
+  $(".addGlow").removeClass("addGlow");
+  game.displayHand();
+  game.suddenDeath = true;
+}
 
 //Player
 function Player(){
@@ -308,6 +340,7 @@ function addCard(location){
     game.selected = false;
     game.swapActive();
     game.checkScore();
+
     }
   }
 }
@@ -358,6 +391,14 @@ function attachListeners() {
     location = location.charAt(location.length-1);
     addCard(location);
   });
+
+  $("#suddenDeathToggle").click(function() {
+    if(game.suddenDeathMode === false) {
+      game.suddenDeathMode = true;
+    } else {
+      game.suddenDeathMode = false;
+    }
+  })
 };
 
 $(document).ready(function() {
