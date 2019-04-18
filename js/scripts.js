@@ -1,4 +1,3 @@
-//Game
 function Game(){
   this.deck = [],
   this.player1 = new Player(),
@@ -13,8 +12,6 @@ function Game(){
   this.selected = false;
   this.suddenDeathMode = false;
 }
-
-
 
 function Card(top, bottom, left, right){
   this.up = top,
@@ -62,9 +59,8 @@ Game.prototype.checkScore = function(){
 
 Game.prototype.shuffle = function() {
   var i = 0;
-   var j = 0;
-  temp = null;
-
+  var j = 0;
+  var temp = null;
   for (i = this.deck.length - 1; i > 0; i -= 1) {
     j = Math.floor(Math.random() * (i + 1));
     temp = this.deck[i];
@@ -105,8 +101,6 @@ function Player(){
   this.active = false
 }
 
-
-
 Game.prototype.swapActive = function(){
   if(this.player1.active === true){
     this.player2.active = true;
@@ -116,17 +110,6 @@ Game.prototype.swapActive = function(){
     this.player1.active = true;
   }
 }
-
-
-//before deck gets shuffled
-// Card.prototype.imageID(){
-//   var giveImageId = [];
-//   for(var i=0; i<=deck.length; i ++){
-//     giveImageId.push("<img id =" +this.id + "src=" + i + "_b.png">)
-//   }
-//   return giveimageId;
-// }
-
 
 Game.prototype.findCard = function(id) {
   for (var i=0; i< this.deck.length; i++) {
@@ -188,7 +171,6 @@ Game.prototype.placeCard = function(location){
       } else if(neighbors[i] === location - 1){
         direction = 'left';
       }
-      console.log(neighbors);
       this.board[location].checkFlip(neighbors[i],direction)
   }
 }
@@ -218,10 +200,8 @@ Card.prototype.checkFlip = function(location, direction){
       }
         break;
       }
-
     }
   }
-
 }
 
 function restartGame(){
@@ -238,7 +218,6 @@ function restartGame(){
   game.dealToPlayers();
   game.displayHand();
   game.checkScore();
-
 }
 
 
@@ -252,7 +231,6 @@ Game.prototype.displayHand = function() {
 var game = new Game();
 
 Game.prototype.flip = function(location){
-  console.log("You flipped!");
   if(game.board[location].owner === 'red'){
     game.board[location].owner = 'blue';
     $("img.board."+location).addClass('animated flip');
@@ -296,27 +274,8 @@ function Player(){
 }
 
 
-// Player.prototype.displayHand = function(card) {
-//   game.currentID
-//   for(var i = 1; i <= 5; i++) {
-//     this.hand[i]
-//     $("#player1deck").addClass("#img1");
-//     $("#player2deck").addClass("#img1")
-//   }
-// }
-
-//before deck gets shuffled
-// Player.prototype.imageId= function(){
-//   var giveImageId = [];
-//   for(var i=0; i<=deck.length; i ++){
-//     giveImageId.push("<img id =" +this.id + "src=" + i + "_b.png>")
-//   }
-//   return giveImageId;
-// }
-
 function addCard(location){
   if(game.selected !== false){
-
     if(game.board[location] >= 0){
       if(game.turn%2 === 0){
         $("img.board."+location).attr("src","img/"+game.selected+"_b.png");
@@ -325,7 +284,6 @@ function addCard(location){
           $("img.board."+location).attr("src","img/"+game.selected+"_r.png");
         }
       }
-
     $("#"+game.selected).removeAttr("src");
     game.board[location]=game.findCard(game.selected);
     game.turn += 1;
@@ -336,43 +294,31 @@ function addCard(location){
       $(".p2").addClass('card');
       $(".p1").removeClass('card');
     }
-    console.log(game);
     game.placeCard(parseInt(location));
     game.selected = false;
     game.swapActive();
     game.checkScore();
-
     }
   }
 }
 
 function drag_handler(ev) {
- console.log("dragStart");
- // Change the source element's background color to signify drag has started
- // Set the drag's format and data. Use the event target's id for the data
  ev.dataTransfer.setData("text/plain", ev.target.id);
-var drag = ev.path[0].getAttribute("id");
-if((game.findCard(drag).owner === 'red' && game.turn%2 ===1) ||(game.findCard(drag).owner === 'blue' && game.turn%2 ===0)){
- game.selected = drag;
-}
- console.log(game.selected);
-
+  var drag = ev.path[0].getAttribute("id");
+  if((game.findCard(drag).owner === 'red' && game.turn%2 ===1) ||(game.findCard(drag).owner === 'blue' && game.turn%2 ===0)){
+   game.selected = drag;
+  }
 }
 
 function dragover_handler(ev) {
- console.log("dragOver");
  ev.preventDefault();
 }
 
 function drop_handler(ev) {
- console.log("Drop");
  ev.preventDefault();
- // Get the data, which is the id of the drop target
  var location = ev.path[0].getAttribute("class");
  location = location.charAt(location.length-1);
- console.log(location);
  addCard(location);
- // Clear the drag data cache (for all formats/types)
  ev.dataTransfer.clearData();
 }
 
@@ -407,7 +353,6 @@ $(document).ready(function() {
   game.shuffle();
   game.dealToPlayers();
   attachListeners();
-  //game.assignImageIds();
   game.displayHand();
   game.checkScore();
 });
