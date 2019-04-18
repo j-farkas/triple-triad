@@ -18,8 +18,7 @@ Game starts with two players and each player has five cards to play with. There 
 * Start a new game
 
 ## Known Bugs
-
-None
+Multiple sudden deaths will break the game.
 
 ## Specs
 _A player drags a card onto the board / The card's image is appended to the space dragged to_
@@ -46,4 +45,4 @@ _A game ends in a tie and sudden death is toggled / Cards are re-dealt to each p
 ### License
 This software is licensed under the MIT license
 
-Copyright (c) 2019 **__**
+Copyright (c) 2019 **_Jared Farkas, Darrion Gering, Kerriann Walker, Mustafa Ghasemi_**
