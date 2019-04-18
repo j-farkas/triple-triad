@@ -5,7 +5,7 @@ Is a card battle mini-game originally from Final Fantasy VIII.
 #### By
 Jared Farkas, Darrion Gering, Kerriann Walker, Mustafa Ghasemi
 
-#### Special thanks to Ryan Mclean
+Special thanks to Ryan Mclean for help on the card assets
 
 ## Description
 
