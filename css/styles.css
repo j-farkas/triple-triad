@@ -184,3 +184,8 @@ input:checked + .slider:before {
   color: black;
   width: 100%;
 }
+.newGame {
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  font-weight: bold;
+}
